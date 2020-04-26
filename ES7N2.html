@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div @click="sortPay" v-for="emp in items">
+            <span @click="sortName">{{ emp.eName}} </span>
+            <span>{{ emp.pay}} </span>
+        </div>
+        <button @click="find('a')">姓名有a</button>
+        <button @click="find()">所有</button>
+    </div>
+</body>
+<script>
+        var vm = new Vue({
+            data() {
+                return {
+                    search: "",
+                    emps: [{ eName:"tom", pay: 10020 },{ eName:"jack", pay: 9800 },
+                    { eName:"andy", pay: 9820 }]
+                }
+            },
+            computed: {
+                items() {
+                    var reg = eval("/" + this.search + "/");
+                    return this.emps.filter(p => p.eName.match(reg));
+                }
+            },
+            methods: {
+                sortPay() { this.emps.sort((a, b) => b.pay - a.pay); },
+                sortName() { this.emps.sort((a, b) => a.eName - b.eName ? 1 : -1); },
+                find(word) { this.search = word || ""; }
+            }
+        }).$mount("#app");
+    </script>
+</html>

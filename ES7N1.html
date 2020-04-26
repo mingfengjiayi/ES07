@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-for="emp in emps" :key="emp.id">
+            <input type="checkbox" />{{emp.id}}.{{emp.eName }}:{{emp.pay}}
+        </div>
+        <button @click="add">添加</button>
+        <button @click="order">升序</button>
+        <button @click="order($event,1)">降序</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            data() {
+                return {
+                    newid: 3,
+                    emps: [{ id: 1, eName:"王志珊", pay: 10020 },{ id: 2, eName:"李山勇", pay: 9800 },
+                    { id: 3, eName:"陈武宁", pay: 9820 }]
+                }
+            },
+            methods: {
+                add() { this.emps.unshift({ id: ++this.newid, eName: "李小丽", pay:9900 }); },
+                order(e,desc) {
+                    console.log(e.target);
+                     desc ? this.emps.sort((a, b) => b.pay - a.pay) : this.emps.sort((a, b) => a.pay - b.pay); }
+            }
+        }).$mount("#app");
+    </script>
+</body>
+</html>

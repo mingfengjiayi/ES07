@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <a href="http://www.gdsspt.cn" @click="judge">松山职院</a>
+        <button @click="login">登录</button>
+        </div>
+    </div>
+</body>
+<script>
+        var vm = new Vue({
+            data() { return { user: "" } },
+            methods: {
+                judge(e) {
+                    if (!this.user) {
+                        e.preventDefault();
+                        alert('非法用户，不能打开网站');
+                    }
+                },
+                login() {
+                    this.user = "admin";
+                    alert('登录成功');
+                }
+            }
+        }).$mount("#app");
+    </script>
+</html>
